@@ -1,0 +1,82 @@
+﻿@model IEnumerable<ProductFilterMvcApp.Models.Product>
+
+@{
+    ViewData["Title"] = "Product List";
+}
+
+<h1>Product List</h1>
+
+<form method="post" asp-action="Add">
+    <label for="name">Product Name</label>
+    <input type="text" id="name" name="name" required />
+
+    <label for="color">Color</label>
+    <select id="color" name="color" required>
+        <option value="Red">Red</option>
+        <option value="Green">Green</option>
+        <option value="Blue">Blue</option>
+    </select>
+
+    <label for="size">Size</label>
+    <select id="size" name="size" required>
+        <option value="Small">Small</option>
+        <option value="Medium">Medium</option>
+        <option value="Large">Large</option>
+        <option value="Yuge">Yuge</option>
+    </select>
+
+    <button type="submit">Add Product</button>
+</form>
+
+<hr />
+
+<h2>Filter Products</h2>
+<form method="post" asp-action="Filter">
+    <label for="filterColor">Color</label>
+    <select id="filterColor" name="color">
+        <option value="Red">Red</option>
+        <option value="Green">Green</option>
+        <option value="Blue">Blue</option>
+    </select>
+
+    <label for="filterSize">Size</label>
+    <select id="filterSize" name="size">
+        <option value="Small">Small</option>
+        <option value="Medium">Medium</option>
+        <option value="Large">Large</option>
+        <option value="Yuge">Yuge</option>
+    </select>
+
+    <button type="submit">Apply Filter</button>
+</form>
+
+<hr />
+
+<h2>Products</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-warning">
+        @TempData["Message"]
+    </div>
+}
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Color</th>
+            <th>Size</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Color</td>
+                <td>@product.Size</td>
+            </tr>
+        }
+    </tbody>
+</table>
